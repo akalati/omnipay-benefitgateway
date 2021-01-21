@@ -27,6 +27,47 @@ The following methods are provided by this package:
 + purchase
 + completePurchase
 
+### purchase
+Use purchase request to construct the redirect link and redirect the customer to benefit gateway payment page
+
+```php
+$gateway = Omnipay::create('BenefitGateway');
+
+$gateway->setTestMode(true); //call setTestMode(true) to use benefit gateway test endpoint https://www.test.benefit-gateway.bh/payment/PaymentHTTP.htm?param=paymentInit
+$gateway->setId(""); //Tranportal ID
+$gateway->setPassword(""); // Tranportal Password
+$gateway->setResourceKey(""); // Terminal Resourcekey
+
+$response = $gateway->purchase([
+	'amount' => 20.5, //Amount in BHD
+	'transactionId' => 1, //Order or transaction reference from your system
+	'returnUrl' => "https://www.example.com/return", //return url
+	'cancelUrl' => "https://www.example.com/error" //error and cancel url
+])->send();
+
+$response->redirect();
+```
+
+### completePurchase
+use completePurchase in your return callback to handle the request sent by the gateway to your system
+```php
+$gateway = Omnipay::create('BenefitGateway');
+
+$gateway->setResourceKey(""); // Terminal Resourcekey
+
+$response = $gateway->completePurchase()->send();
+
+if ($response->isSuccessful()) {
+	$transactionId = $response->getTransactionId(); //transaction id set in the purchase request
+	$transactionReference = $response->getTransactionReference(); //transaction reference set by the gateway
+	$responseData = $response->getData(); //response received from benefit gateway
+	// mark order as complete
+} else {
+	$response->getMessage();
+	// display error message to customer
+}
+```
+
 For general usage instructions, please see the main [Omnipay](https://github.com/thephpleague/omnipay)
 repository.
 
