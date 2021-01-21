@@ -19,7 +19,7 @@ class CompletePurchaseRequest extends AbstractRequest
 
         $data = $this->getRequestData();
 
-        if ($data['trandata']) {
+        if (isset($data['trandata'])) {
             parse_str(decryptAES($data['trandata'], $this->getResourceKey()), $decrypted);
 
             $data['decrypted'] = $decrypted;
@@ -75,7 +75,7 @@ class CompletePurchaseRequest extends AbstractRequest
     public function validateRequestData(...$args)
     {
         foreach ($args as $key) {
-            $value = $this->validateRequestData()[$key] ?? null;
+            $value = $this->getRequestData()[$key] ?? null;
             if (!isset($value)) {
                 throw new InvalidRequestException("The $key parameter is required");
             }

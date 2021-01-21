@@ -14,9 +14,8 @@ class CompletePurchaseResponse extends AbstractResponse
     public function isSuccessful()
     {
         $data = $this->getData();
-        $response = $data['decrypted'];
 
-        if (isset($response['result']) && $response['result'] === 'CAPTURED') {
+        if (isset($data['decrypted']) && isset($data['decrypted']['result']) && $data['decrypted']['result'] === 'CAPTURED') {
             return true;
         }
 

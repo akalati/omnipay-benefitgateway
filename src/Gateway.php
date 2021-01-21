@@ -57,6 +57,17 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * Set gateway id
+     *
+     * @param string $value
+     * @return void
+     */
+    public function setId($value)
+    {
+        $this->setParameter('id', $value);
+    }
+
+    /**
      * Set gateway password
      *
      * @param string $value
