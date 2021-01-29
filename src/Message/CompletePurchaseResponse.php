@@ -40,7 +40,7 @@ class CompletePurchaseResponse extends AbstractResponse
     public function getMessage()
     {
         $data = $this->getData();
-        return isset($data['descrypted']['result']) ? $data['descrypted']['result'] : $data['ErrorText'];
+        return isset($data['decrypted']['result']) ? $data['decrypted']['result'] : $data['ErrorText'];
     }
 
     /**
