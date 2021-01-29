@@ -27,5 +27,8 @@
         "files": [
             "src/Common/helpers.php"
         ]
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
