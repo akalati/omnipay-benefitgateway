@@ -15,10 +15,11 @@
         }
     ],
     "require": {
-        "omnipay/common": "^3.0"
+        "php": "^7.3|^8.0",
+        "omnipay/common": "^3.1"
     },
     "require-dev": {
-        "omnipay/tests": "^3.1"
+        "omnipay/tests": "^3|^4"
     },
     "autoload": {
         "psr-4": {

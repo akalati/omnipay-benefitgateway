@@ -12,19 +12,19 @@ class CompletePurchaseRequest extends AbstractRequest
      */
     public function getData()
     {
-        $this->validateRequestData(
-            'paymentid',
-            'trackid'
-        );
-
         $data = $this->getRequestData();
 
         if (isset($data['trandata'])) {
             parse_str(decryptAES($data['trandata'], $this->getResourceKey()), $decrypted);
 
-            $data['decrypted'] = $decrypted;
+            $this->setRequestData($decrypted);
         }
-        return $data;
+
+        $this->validateRequestData(
+            'paymentid',
+            'trackid'
+        );
+        return $this->getRequestData();
     }
 
     /**

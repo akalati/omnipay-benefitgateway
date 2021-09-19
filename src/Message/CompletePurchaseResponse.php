@@ -15,7 +15,7 @@ class CompletePurchaseResponse extends AbstractResponse
     {
         $data = $this->getData();
 
-        if (isset($data['decrypted']) && isset($data['decrypted']['result']) && $data['decrypted']['result'] === 'CAPTURED') {
+        if (isset($data['result']) && $data['result'] === 'CAPTURED') {
             return true;
         }
 
@@ -40,7 +40,7 @@ class CompletePurchaseResponse extends AbstractResponse
     public function getMessage()
     {
         $data = $this->getData();
-        return isset($data['decrypted']['result']) ? $data['decrypted']['result'] : $data['ErrorText'];
+        return isset($data['result']) ? $data['result'] : $data['ErrorText'];
     }
 
     /**

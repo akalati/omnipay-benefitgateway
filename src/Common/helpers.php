@@ -70,7 +70,7 @@ if (!function_exists('pkcs5_unpad')) {
     }
 }
 
-if (!function_exists('getCurrencyCode')) {
+if (!function_exists('getCurrency')) {
     function getCurrency($currency)
     {
         return array(
